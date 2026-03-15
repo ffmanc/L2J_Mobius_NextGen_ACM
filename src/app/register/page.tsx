@@ -47,7 +47,7 @@ export default function RegisterPage() {
 
           <form onSubmit={handleSubmit} className="auth-form">
             {/* Form labels fade with a slight offset */}
-            <LangSection delay={0.04}>
+            <LangSection delay={0.04} zIndex={50}>
               <div className="input-field">
                 <label><User size={14} /> {t("username")}</label>
                 <input 
@@ -60,7 +60,7 @@ export default function RegisterPage() {
               </div>
             </LangSection>
 
-            <LangSection delay={0.06}>
+            <LangSection delay={0.06} zIndex={40}>
               <div className="input-field relative">
                 <label><Mail size={14} /> {t("email")}</label>
                 <input 
@@ -78,7 +78,7 @@ export default function RegisterPage() {
               </div>
             </LangSection>
 
-            <LangSection delay={0.08}>
+            <LangSection delay={0.08} zIndex={30}>
               <div className="input-field">
                 <label><Lock size={14} /> {t("password")}</label>
                 <input 
@@ -92,7 +92,7 @@ export default function RegisterPage() {
               </div>
             </LangSection>
 
-            <LangSection delay={0.10}>
+            <LangSection delay={0.10} zIndex={20}>
               <div className="input-field">
                 <label><Lock size={14} /> {t("confirmPassword")}</label>
                 <input 

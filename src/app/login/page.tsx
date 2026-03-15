@@ -52,7 +52,7 @@ export default function LoginPage() {
           </div>
 
           <form action={formAction} className="auth-form">
-            <div className="input-field">
+            <div className="input-field relative">
               <label><Shield size={14} /> {t("accountName")}</label>
               <input
                 name="login"
@@ -60,6 +60,7 @@ export default function LoginPage() {
                 placeholder={t("placeholderAccountId")}
                 required
                 autoFocus
+                autoComplete="off"
               />
             </div>
 

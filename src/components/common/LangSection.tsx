@@ -32,6 +32,7 @@ interface LangSectionProps {
   delay?: number;
   className?: string;
   style?: CSSProperties;
+  zIndex?: number;
 }
 
 export function LangSection({
@@ -39,6 +40,7 @@ export function LangSection({
   delay = 0,
   className,
   style,
+  zIndex,
 }: LangSectionProps) {
   const global = useLanguage();
   const [localLang, setLocalLang] = useState<Language>(global.language);
@@ -79,10 +81,12 @@ export function LangSection({
         style={{
           ...style,
           opacity,
+          zIndex,
+          position: zIndex ? "relative" : style?.position,
           transition:
             opacity === 0
-              ? "opacity 200ms ease"       // fade-out: 200ms
-              : "opacity 400ms ease",      // fade-in: 400ms (slower, more visible)
+              ? "opacity 200ms ease" // fade-out: 200ms
+              : "opacity 400ms ease", // fade-in: 400ms (slower, more visible)
           willChange: "opacity",
         }}
       >
