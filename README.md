@@ -4,14 +4,38 @@ L2J Mobius NextGen ACM is a premium, modern, and highly responsive web-based acc
 
 ---
 
-## 🚀 Main Features
+## 🚀 Key Features
 
-- **Premium Dark UI**: Modern aesthetics with glassmorphism, gradients, and smooth animations.
-- **Real-time Server Status**: Dynamic header widget showing Login and Game server connectivity.
-- **Multilingual Support**: Fully localized in English, Portuguese, Spanish, German, and Russian.
-- **Light/Dark Mode**: Integrated theme toggle for user preference.
-- **Responsive Design**: Optimized for Desktop and Mobile (Full-screen forms on mobile).
-- **Prisma Integration**: Direct and secure database access for account and character management.
+### 👤 For Players
+- **Account Management**: Secure login and management of account credentials.
+- **Character Management**: Full overview of characters, levels, and stats.
+- **Donation Management**: Integrated system for managing contributions.
+- **Payment Gateways**: Support for multiple commercial payment methods.
+- **Auto Delivery**: Automatic item delivery after donation confirmation.
+- **VIP & Voting**: Dedicated systems for VIP status and server voting rewards.
+
+### 🛡️ For Administrators
+- **Advanced Admin Tools**: Comprehensive dashboard for player and server oversight.
+- **Item Management**: Tools for item "blessing" and inventory control.
+- **Stats Editing**: Real-time adjustment of character statistics and levels.
+- **Live Metrics**: Real-time tracking of Online Players, GMs, and Server Status.
+
+---
+
+## 💻 Tech Stack (NextGen)
+
+Built with the latest and most efficient technologies for maximum performance and security:
+
+| Component     | Technology       | Description                                |
+| :------------ | :--------------- | :----------------------------------------- |
+| **Framework** | **Next.js 14**   | SSR, App Router, and Edge runtime support. |
+| **Language**  | **TypeScript 5** | Static typing for enterprise-grade stability. |
+| **Database**  | **Prisma ORM**   | Type-safe queries for MySQL and MariaDB.   |
+| **Animation** | **Framer Motion**| GPU-accelerated smooth UI transitions.     |
+| **Styling**   | **Vanilla CSS**  | Modern CSS Variables for zero-latency theming. |
+| **Auth**      | **NextAuth v5**  | Secure JWT-based authentication and RBAC.  |
+| **Icons**     | **Lucide React** | Over 600+ optimized SVG vector icons.      |
+| **Runtime**   | **Node.js / Edge**| Blazing fast Server Actions execution.     |
 
 ---
 
@@ -23,86 +47,53 @@ L2J Mobius NextGen ACM is a premium, modern, and highly responsive web-based acc
 
 ---
 
-## 📥 Local Installation (Windows & Linux)
+## 📥 Installation Guide
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/yourusername/L2J_Mobius_ACM_NextJS.git
-cd L2J_Mobius_ACM_NextJS
-```
+### 1. Pre-installation
+Ensure you have Node.js and a database (MariaDB/MySQL) ready.
 
-### 2. Install Dependencies
+### 2. Implementation
 ```bash
+git clone https://github.com/ffmanc/L2J_Mobius_NextGen_ACM.git
+cd L2J_Mobius_NextGen_ACM
 npm install
 ```
 
-### 3. Configure Environment Variables
-Create a `.env` file in the root directory (use `.env.example` as a template):
+### 3. Configuration
+Create a `.env` file (use `.env.example` as a template):
 ```bash
 cp .env.example .env
 ```
-Update the `DATABASE_URL` with your database credentials:
+Update `DATABASE_URL` with your credentials:
 `DATABASE_URL="mysql://USER:PASSWORD@localhost:3306/l2jmobius"`
 
-### 4. Setup the Database
-Sync the Prisma schema with your existing L2J Mobius database:
+### 4. Database Setup
 ```bash
 npx prisma generate
 ```
 
-### 5. Run the Application
-**Development mode:**
+### 5. Start Application
 ```bash
+# Development
 npm run dev
-```
-**Production Build:**
-```bash
+
+# Production
 npm run build
 npm start
 ```
 
 ---
 
-## 🌐 Cloud Deployment (Hosted)
+## 🌐 Cloud Deployment
 
-L2J Mobius NextGen ACM is optimized for fast and easy deployment on modern cloud platforms.
-
-### 1. Vercel (Recommended - FREE)
-1. Push your code to a GitHub repository.
-2. Link the repository to [Vercel](https://vercel.com).
-3. Add your `.env` variables in the Vercel Project Settings.
-4. Vercel will automatically build and deploy the application.
-
-### 2. Render (Alternative - FREE/Paid)
-1. Connect your GitHub repository to [Render](https://render.com).
-2. Create a new "Web Service".
-3. Add your Environment Variables.
-4. Render will handle the `npm run build` and `npm start` commands.
-
-### 3. Database Hosting
-Since cloud platforms like Vercel skip the persistent database, you need a remote MariaDB/MySQL instance. Suggestions:
-- **Aiven.io** (Free/Paid MariaDB)
-- **Railway.app** (Paid/Trial MySQL)
-- **Supabase** (Postgres only - not recommended for Mobius defaults)
+The L2J Mobius NextGen ACM is optimized for:
+- **Vercel** (One-click deployment, FREE tier available)
+- **Render** (Easy "Web Service" hosting)
+- **Docker** (Full containerization support)
 
 ---
 
-## 🔧 Configuration (.env)
+## 📜 License & Credits
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `DATABASE_URL` | MariaDB/MySQL Connection String | `mysql://...` |
-| `LOGIN_HOST` | Hostname of your Login Server | `localhost` |
-| `LOGIN_PORT` | Port of your Login Server | `2106` |
-| `GAME_HOST` | Hostname of your Game Server | `localhost` |
-| `GAME_PORT` | Port of your Game Server | `7777` |
-
----
-
-## 📜 License
-
-This project is intended for educational and private server management purposes. Open Source & Free.
-
----
-
-*Developed with ❤️ for the L2J Mobius Community.*
+Developed for the L2J Mobius Community. Free & Open Source.
+❤️ Powered by **Next.js** and **L2J Mobius**.
