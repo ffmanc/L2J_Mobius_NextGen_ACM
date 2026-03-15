@@ -7,7 +7,9 @@ L2J Mobius NextGen ACM is a premium, modern, and highly responsive web-based acc
 ## 🚀 Key Features
 
 ### 👤 For Players
-- **Account Management**: Secure login and management of account credentials.
+- **Modular Auth System**: Stunning, animated, and unified interface for all authentication flows.
+- **Account Registration**: Secure account creation with real-time validation and legacy hashing support.
+- **Password Recovery**: Integrated recovery system with email-based identity verification.
 - **Character Management**: Full overview of characters, levels, and stats.
 - **Donation Management**: Integrated system for managing contributions.
 - **Payment Gateways**: Support for multiple commercial payment methods.

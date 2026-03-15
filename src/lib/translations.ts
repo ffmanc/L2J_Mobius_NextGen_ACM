@@ -110,7 +110,20 @@ export const translations = {
     language: "Language",
     dark: "Dark",
     light: "Light",
-    system: "System"
+    system: "System",
+
+    // Registration Errors
+    errorAllFieldsRequired: "All fields are required.",
+    errorInvalidUsername: "Username must be alphanumeric (4-14 chars).",
+    errorPasswordMismatch: "Passwords do not match.",
+    errorPasswordTooShort: "Password is too short (min 6 chars).",
+    errorAccountExists: "This username is already taken.",
+    errorInternalServer: "Internal server error. Please try again later.",
+    errorRecoveryNotFound: "Account not found or email mismatch.",
+    recoverySuccess: "Recovery instructions sent to your email.",
+    recoveryTitle: "Recover Password",
+    recoverySubtitle: "Enter your account and email to reset your password",
+    sendRecovery: "Send Instructions",
   },
   pt: {
     welcome: "L2J Mobius NextGen ACM | Painel de Próxima Geração",
@@ -212,7 +225,20 @@ export const translations = {
     language: "Idioma",
     dark: "Escuro",
     light: "Claro",
-    system: "Sistema"
+    system: "Sistema",
+
+    // Erros de Registro
+    errorAllFieldsRequired: "Todos os campos são obrigatórios.",
+    errorInvalidUsername: "Usuário deve ser alfanumérico (4-14 chars).",
+    errorPasswordMismatch: "As senhas não coincidem.",
+    errorPasswordTooShort: "A senha é muito curta (mín. 6 chars).",
+    errorAccountExists: "Este nome de usuário já está em uso.",
+    errorInternalServer: "Erro interno do servidor. Tente novamente mais tarde.",
+    errorRecoveryNotFound: "Conta não encontrada ou e-mail incorreto.",
+    recoverySuccess: "Instruções de recuperação enviadas para seu e-mail.",
+    recoveryTitle: "Recuperar Senha",
+    recoverySubtitle: "Insira sua conta e e-mail para resetar sua senha",
+    sendRecovery: "Enviar Instruções",
   },
   es: {
     welcome: "L2J Mobius NextGen ACM | Panel de Control de Nueva Generación",
@@ -314,7 +340,20 @@ export const translations = {
     language: "Idioma",
     dark: "Oscuro",
     light: "Claro",
-    system: "Sistema"
+    system: "Sistema",
+
+    // Errores de Registro
+    errorAllFieldsRequired: "Todos los campos son obligatorios.",
+    errorInvalidUsername: "El usuario debe ser alfanumérico (4-14 chars).",
+    errorPasswordMismatch: "Las contraseñas no coinciden.",
+    errorPasswordTooShort: "La contraseña es muy corta (mín. 6 chars).",
+    errorAccountExists: "Este nombre de usuario ya está ocupado.",
+    errorInternalServer: "Error interno del servidor. Inténtelo más tarde.",
+    errorRecoveryNotFound: "Cuenta no encontrada o correo incorrecto.",
+    recoverySuccess: "Instrucciones de recuperación enviadas a tu correo.",
+    recoveryTitle: "Recuperar Contraseña",
+    recoverySubtitle: "Ingresa tu cuenta y correo para restablecerla",
+    sendRecovery: "Enviar Instrucciones",
   },
   de: {
     welcome: "L2J Mobius NextGen ACM | Steuerungspanel der nächsten Generation",
@@ -416,7 +455,20 @@ export const translations = {
     language: "Sprache",
     dark: "Dunkel",
     light: "Hell",
-    system: "System"
+    system: "System",
+
+    // Registrierung-Fehler
+    errorAllFieldsRequired: "Alle Felder sind erforderlich.",
+    errorInvalidUsername: "Benutzername muss alphanumerisch sein (4-14 Zeichen).",
+    errorPasswordMismatch: "Passwörter stimmen nicht überein.",
+    errorPasswordTooShort: "Passwort ist zu kurz (min. 6 Zeichen).",
+    errorAccountExists: "Dieser Benutzername ist bereits vergeben.",
+    errorInternalServer: "Interner Serverfehler. Bitte später erneut versuchen.",
+    errorRecoveryNotFound: "Konto nicht gefunden oder E-Mail falsch.",
+    recoverySuccess: "Wiederherstellungsanweisungen an Ihre E-Mail gesendet.",
+    recoveryTitle: "Passwort wiederherstellen",
+    recoverySubtitle: "Geben Sie Ihr Konto und Ihre E-Mail-Adresse ein",
+    sendRecovery: "Anweisungen senden",
   },
   ru: {
     welcome: "L2J Mobius NextGen ACM | Панель управления нового поколения",
@@ -518,6 +570,19 @@ export const translations = {
     language: "Язык",
     dark: "Темная",
     light: "Светлая",
-    system: "Системная"
+    system: "Системная",
+
+    // Ошибки регистрации
+    errorAllFieldsRequired: "Все поля обязательны для заполнения.",
+    errorInvalidUsername: "Имя пользователя должно быть буквенно-цифровым (4-14 симв.).",
+    errorPasswordMismatch: "Пароли не совпадают.",
+    errorPasswordTooShort: "Пароль слишком короткий (мин. 6 симв.).",
+    errorAccountExists: "Это имя пользователя уже занято.",
+    errorInternalServer: "Внутренняя ошибка сервера. Попробуйте позже.",
+    errorRecoveryNotFound: "Аккаунт не найден или e-mail не совпадает.",
+    recoverySuccess: "Инструкции по восстановлению отправлены на ваш e-mail.",
+    recoveryTitle: "Восстановление пароля",
+    recoverySubtitle: "Введите логин и e-mail для сброса пароля",
+    sendRecovery: "Отправить инструкции",
   },
 };
