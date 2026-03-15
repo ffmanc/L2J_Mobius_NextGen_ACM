@@ -83,19 +83,10 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.85, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="hero-icon"
+            className="hero-logo-wrapper"
           >
-            <Image
-              src="/logo.png"
-              alt="L2J Mobius ACM"
-              width={340}
-              height={340}
-              priority
-              className="hero-logo-img"
-            />
+            <Logo size="xl" orientation="vertical" />
           </motion.div>
-
-          <Logo size="lg" className="hero-logo" hideIcon />
 
           <LangSection delay={0}>
             <motion.p

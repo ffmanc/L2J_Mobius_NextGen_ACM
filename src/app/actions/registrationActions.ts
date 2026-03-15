@@ -20,12 +20,27 @@ export interface RegistrationState {
 }
 
 /**
+ * Cloudflare Turnstile Verification Helper
+ */
+async function verifyTurnstile(token: string) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true;
+
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `secret=${secret}&response=${token}`,
+    });
+    const outcome = await res.json();
+    return outcome.success;
+  } catch (e) {
+    return false;
+  }
+}
+
+/**
  * Server Action to handle user registration.
- * Documents: English. Standard: High-Standard Engineering.
- * 
- * @param prevState - The previous state of the form
- * @param formData - The submitted form data
- * @param lang - The current user language for server-side error messages
  */
 export async function register(
   prevState: RegistrationState, 
@@ -36,11 +51,18 @@ export async function register(
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirmPassword") as string;
+  const cfToken = formData.get("cf-turnstile-response") as string;
 
   const t = (key: keyof (typeof translations)["en"]) =>
     translations[lang][key] || translations["en"][key] || key;
 
-  // 1. Basic Validation
+  // 1. Cloudflare Turnstile Protection
+  const isHuman = await verifyTurnstile(cfToken);
+  if (!isHuman) {
+    return { error: "Security check failed. Please try again.", success: false };
+  }
+
+  // 2. Basic Validation
   if (!username || !email || !password || !confirmPassword) {
     return { error: t("errorAllFieldsRequired"), success: false };
   }
@@ -80,17 +102,10 @@ export async function register(
         email: email,
         lastactive: BigInt(Date.now()),
         accessLevel: 0,
-        lastIP: "127.0.0.1", // Default local IP for initialization
+        lastIP: "127.0.0.1",
+        // @ts-ignore - Prisma might not have generated the type yet
+        activated: 0, // Requires email verification
       },
-    });
-
-    // 4. Set session cookie automatically after successful registration
-    const cookieStore = await cookies();
-    cookieStore.set("l2j_session", username, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 60 * 24 * 7, // 1 Week
-      path: "/",
     });
 
     return { error: null, success: true };

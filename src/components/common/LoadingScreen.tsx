@@ -2,18 +2,32 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Logo } from "@/components/common/Logo";
 
 export function LoadingScreen() {
   const [isVisible, setIsVisible] = useState(true);
+  const pathname = usePathname();
+
+  // Smart loading: Only show on valid application entry points
+  const isValidRoute = ["/", "/login", "/register", "/recovery", "/dashboard"].some(
+    route => pathname === route || pathname?.startsWith("/dashboard/")
+  );
 
   useEffect(() => {
+    if (!isValidRoute) {
+      setIsVisible(false);
+      return;
+    }
+
     // Hide loading screen after a short delay to ensure hydration is complete
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 1500); // 1.5s for a more premium impact
+    }, 1500); 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isValidRoute]);
+
+  if (!isValidRoute) return null;
 
   return (
     <AnimatePresence>
@@ -44,36 +58,7 @@ export function LoadingScreen() {
               }}
               className="loader-logo"
             >
-              <div style={{ width: 220, height: 220, display: "flex" }}>
-                <Image 
-                  src="/logo.png"
-                  alt="Logo"
-                  width={220}
-                  height={220}
-                  priority
-                  style={{ width: "100%", height: "100%", objectFit: "contain" }}
-                />
-              </div>
-            </motion.div>
-            
-            <motion.div
-              className="loader-text-group"
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <motion.h1 className="loader-title">
-                L2J Mobius <span className="accent">NextGen</span> ACM
-              </motion.h1>
-              
-              <motion.p 
-                className="loader-subtitle"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-              >
-                Powered by NextJS
-              </motion.p>
+              <Logo size="xl" orientation="vertical" />
             </motion.div>
 
             <div className="loader-bar">

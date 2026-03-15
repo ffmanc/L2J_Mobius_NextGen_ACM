@@ -5,24 +5,33 @@ import Link from "next/link";
 
 interface LogoProps {
   className?: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   hideIcon?: boolean;
+  hideText?: boolean;
+  orientation?: "horizontal" | "vertical";
 }
 
 const sizeMap: Record<string, number> = {
-  sm: 80, // Drastically increased for Top-bar
-  md: 60,
-  lg: 72,
+  sm: 40,
+  md: 64,
+  lg: 80,
+  xl: 240,
 };
 
-export function Logo({ className = "", size = "md", hideIcon = false }: LogoProps) {
+export function Logo({ 
+  className = "", 
+  size = "md", 
+  hideIcon = false,
+  hideText = false,
+  orientation = "horizontal"
+}: LogoProps) {
   const px = sizeMap[size];
 
   return (
     <Link
       href="/"
-      className={`logo-container logo-${size} ${className}`}
-      style={{ gap: hideIcon ? 0 : "0.75rem" }}
+      className={`logo-container logo-${size} logo-${orientation} ${className}`}
+      style={{ gap: hideIcon ? 0 : orientation === "vertical" ? "1.5rem" : "0.75rem" }}
     >
       {!hideIcon && (
         <div
@@ -39,12 +48,14 @@ export function Logo({ className = "", size = "md", hideIcon = false }: LogoProp
           />
         </div>
       )}
-      <div className="logo-text-group">
-        <span className="logo-text">
-          L2J Mobius <span className="accent">NextGen</span> ACM
-        </span>
-        <span className="logo-subtext">Powered by NextJS</span>
-      </div>
+      {!hideText && (
+        <div className="logo-text-container">
+          <span className="logo-text">
+            L2 <span className="accent">NextGen</span> ACM
+          </span>
+          <span className="logo-subtext">Powered by NextJS</span>
+        </div>
+      )}
     </Link>
   );
 }

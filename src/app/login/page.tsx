@@ -9,6 +9,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { AuthCard } from "@/components/auth/AuthCard";
 import { AuthInput } from "@/components/auth/AuthInput";
+import { Turnstile } from "@/components/auth/Turnstile";
 
 /**
  * LoginPage - User login screen.
@@ -81,6 +82,9 @@ export default function LoginPage() {
             required
           />
         </AuthInput>
+
+        {/* Turnstile Protection */}
+        <Turnstile />
 
         {/* Authentication Alerts */}
         {state?.error && (

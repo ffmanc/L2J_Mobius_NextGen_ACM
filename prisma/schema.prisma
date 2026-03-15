@@ -22,6 +22,7 @@ model Account {
   hop2         String?   @db.Char(15)
   hop3         String?   @db.Char(15)
   hop4         String?   @db.Char(15)
+  activated    Int       @default(0) @db.TinyInt
 
   @@map("accounts")
 }

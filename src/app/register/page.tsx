@@ -11,6 +11,7 @@ import { AuthCard } from "@/components/auth/AuthCard";
 import { AuthInput } from "@/components/auth/AuthInput";
 import { LangSection } from "@/components/common/LangSection";
 import { register } from "@/app/actions/registrationActions";
+import { Turnstile } from "@/components/auth/Turnstile";
 import { motion } from "framer-motion";
 
 /**
@@ -37,13 +38,14 @@ export default function RegisterPage() {
   );
 
   /**
-   * Effect to redirect on successful registration.
+   * Effect to handle successful registration.
    */
   useEffect(() => {
     if (state.success) {
+      // Allow user to read the success message before redirecting to login
       const timer = setTimeout(() => {
-        router.push("/dashboard");
-      }, 1500);
+        router.push("/login");
+      }, 6000);
       return () => clearTimeout(timer);
     }
   }, [state.success, router]);
@@ -60,6 +62,7 @@ export default function RegisterPage() {
       }
     >
       <form action={formAction} className="auth-form">
+        {/* ... existing fields ... */}
         {/* Username Field */}
         <AuthInput
           label={t("username")}
@@ -79,7 +82,6 @@ export default function RegisterPage() {
           />
         </AuthInput>
 
-        {/* Email Field with Autocomplete */}
         <AuthInput
           label={t("email")}
           icon={<Mail size={14} />}
@@ -104,7 +106,6 @@ export default function RegisterPage() {
           />
         </AuthInput>
 
-        {/* Password Field with Requirements */}
         <AuthInput
           label={t("password")}
           icon={<Lock size={14} />}
@@ -123,7 +124,6 @@ export default function RegisterPage() {
           />
         </AuthInput>
 
-        {/* Confirm Password Field */}
         <AuthInput
           label={t("confirmPassword")}
           icon={<Lock size={14} />}
@@ -140,6 +140,9 @@ export default function RegisterPage() {
             disabled={isPending}
           />
         </AuthInput>
+
+        {/* Turnstile Protection */}
+        <Turnstile />
 
         {/* Action Result Alerts */}
         {state.error && (
@@ -158,7 +161,7 @@ export default function RegisterPage() {
             animate={{ opacity: 1, y: 0 }}
             className="auth-alert success"
           >
-            {t("authSuccess")}
+            {t("registrationSuccessVerify")}
           </motion.div>
         )}
 
@@ -169,7 +172,7 @@ export default function RegisterPage() {
             disabled={isPending || state.success}
           >
             {isPending ? (
-              t("authenticating")
+              t("registering")
             ) : (
               <>
                 <UserPlus size={18} />

@@ -1,14 +1,9 @@
 import { db } from "@/lib/db";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { UserCircle2 } from "lucide-react";
-import { ServerStatus } from "@/components/dashboard/ServerStatus";
+import { UserCircle2, PlusCircle } from "lucide-react";
+import { CharacterCard } from "@/components/dashboard/CharacterCard";
 
-/**
- * Modern Character Dashboard
- * Queries the `characters` table directly linked to the L2J Game Server
- * and displays them in a responsive CSS grid.
- */
 export default async function DashboardPage() {
   const cookieStore = await cookies();
   const session = cookieStore.get("l2j_session");
@@ -24,76 +19,29 @@ export default async function DashboardPage() {
   });
 
   return (
-    <div>
-      <ServerStatus />
-      
-      <h1 style={{ color: "var(--text-primary)", marginBottom: "0.5rem" }}>My Characters</h1>
-      <p style={{ color: "var(--text-secondary)", marginBottom: "2rem" }}>
-        Manage your linked game characters on the Rosevain server.
-      </p>
+    <div className="dashboard-premium-container">
+      <header className="dashboard-welcome">
+        <h1 className="welcome-title">My Characters</h1>
+        <p className="welcome-subtitle">
+          Manage your linked game characters on the Rosevain server.
+        </p>
+      </header>
 
       {characters.length === 0 ? (
-        <div
-          style={{
-            padding: "3rem",
-            textAlign: "center",
-            backgroundColor: "var(--bg-secondary)",
-            borderRadius: "12px",
-            border: "1px dashed var(--border-light)",
-          }}
-        >
-          <UserCircle2 size={48} style={{ color: "var(--text-muted)", margin: "0 auto 1rem" }} />
-          <h3 style={{ color: "var(--text-secondary)", margin: 0 }}>No characters found</h3>
-          <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginTop: "0.5rem" }}>
-            Create a character in-game to see them here.
+        <div className="empty-state-card">
+          <UserCircle2 size={64} className="empty-icon" />
+          <h3 className="empty-title">No characters found</h3>
+          <p className="empty-desc">
+            Your journey hasn't started yet. Create a character in-game to see them here.
           </p>
+          <button className="btn btn-secondary mt-4">
+            <PlusCircle size={18} /> How to connect
+          </button>
         </div>
       ) : (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-            gap: "1.5rem",
-          }}
-        >
+        <div className="char-grid-premium">
           {characters.map((char: any) => (
-            <div
-              key={char.charId}
-              className="character-card"
-              style={{
-                backgroundColor: "var(--bg-secondary)",
-                border: "1px solid var(--border-light)",
-                borderRadius: "12px",
-                padding: "1.5rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-                transition: "transform var(--transition-normal)",
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <strong style={{ fontSize: "1.2rem", color: "var(--text-primary)" }}>{char.char_name}</strong>
-                <span
-                  style={{
-                    backgroundColor: char.online ? "var(--success)" : "var(--bg-tertiary)",
-                    color: char.online ? "#fff" : "var(--text-muted)",
-                    padding: "0.2rem 0.6rem",
-                    borderRadius: "20px",
-                    fontSize: "0.8rem",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {char.online ? "ONLINE" : "OFFLINE"}
-                </span>
-              </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem", fontSize: "0.9rem", color: "var(--text-secondary)" }}>
-                <div><strong>Level:</strong> {char.level || 0}</div>
-                <div><strong>Class ID:</strong> {char.classid ?? "Unknown"}</div>
-                <div><strong>PvP / PK:</strong> {char.pvpkills || 0} / {char.pkkills || 0}</div>
-                <div><strong>Play Time:</strong> {char.onlinetime ? Math.floor(char.onlinetime / 60) : 0} hours</div>
-              </div>
-            </div>
+            <CharacterCard key={char.charId} char={char} />
           ))}
         </div>
       )}

@@ -124,6 +124,7 @@ export const translations = {
     recoveryTitle: "Recover Password",
     recoverySubtitle: "Enter your account and email to reset your password",
     sendRecovery: "Send Instructions",
+    registrationSuccessVerify: "Account created! Please check your email to activate your account before logging in.",
   },
   pt: {
     welcome: "L2J Mobius NextGen ACM | Painel de Próxima Geração",
@@ -239,6 +240,7 @@ export const translations = {
     recoveryTitle: "Recuperar Senha",
     recoverySubtitle: "Insira sua conta e e-mail para resetar sua senha",
     sendRecovery: "Enviar Instruções",
+    registrationSuccessVerify: "Conta criada! Por favor, verifique seu e-mail para ativar sua conta antes de fazer o login.",
   },
   es: {
     welcome: "L2J Mobius NextGen ACM | Panel de Control de Nueva Generación",
@@ -354,6 +356,7 @@ export const translations = {
     recoveryTitle: "Recuperar Contraseña",
     recoverySubtitle: "Ingresa tu cuenta y correo para restablecerla",
     sendRecovery: "Enviar Instrucciones",
+    registrationSuccessVerify: "¡Cuenta creada! Por favor, revisa tu correo electrónico para activar tu cuenta antes de iniciar sesión.",
   },
   de: {
     welcome: "L2J Mobius NextGen ACM | Steuerungspanel der nächsten Generation",
@@ -469,6 +472,7 @@ export const translations = {
     recoveryTitle: "Passwort wiederherstellen",
     recoverySubtitle: "Geben Sie Ihr Konto und Ihre E-Mail-Adresse ein",
     sendRecovery: "Anweisungen senden",
+    registrationSuccessVerify: "Konto erstellt! Bitte überprüfen Sie Ihre E-Mail, um Ihr Konto zu aktivieren, bevor Sie sich anmelden.",
   },
   ru: {
     welcome: "L2J Mobius NextGen ACM | Панель управления нового поколения",
@@ -584,5 +588,6 @@ export const translations = {
     recoveryTitle: "Восстановление пароля",
     recoverySubtitle: "Введите логин и e-mail для сброса пароля",
     sendRecovery: "Отправить инструкции",
+    registrationSuccessVerify: "Аккаунт создан! Пожалуйста, проверьте свою электронную почту, чтобы активировать аккаунт перед входом.",
   },
 };

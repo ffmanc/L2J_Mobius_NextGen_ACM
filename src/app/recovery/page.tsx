@@ -9,6 +9,7 @@ import { AuthInput } from "@/components/auth/AuthInput";
 import { requestRecovery } from "@/app/actions/recoveryActions";
 import { motion } from "framer-motion";
 import { LangSection } from "@/components/common/LangSection";
+import { Turnstile } from "@/components/auth/Turnstile";
 
 /**
  * RecoveryPage - Password recovery screen.
@@ -69,6 +70,9 @@ export default function RecoveryPage() {
             disabled={isPending || state.success}
           />
         </AuthInput>
+
+        {/* Turnstile Protection */}
+        <Turnstile />
 
         {/* Result Alerts */}
         {state.error && (

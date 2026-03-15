@@ -4,6 +4,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { Topbar } from "@/components/layout/Topbar";
 import { db } from "@/lib/db";
 import { logout } from "@/app/actions/authActions";
+import { PageTransition } from "@/components/layout/PageTransition";
 
 /**
  * Dashboard Layout
@@ -35,7 +36,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
         {/* Main Page Area */}
         <main className="dashboard-content">
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </main>
       </div>
     </div>

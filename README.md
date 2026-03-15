@@ -1,6 +1,9 @@
-# L2J Mobius NextGen ACM (Account Control Manager)
+# L2 NextGen ACM (Account Control Manager)
 
-L2J Mobius NextGen ACM is a premium, modern, and highly responsive web-based account management interface designed specifically for L2J Mobius servers. Built with **Next.js 14**, **Prisma**, **TypeScript**, and **Framer Motion**, it provides a stunning dark-themed experience with real-time server metrics.
+> [!IMPORTANT]
+> **DEVELOPER COMPLIANCE REQUIRED**: All contributions must strictly follow the [Project Coding Standards](file:///C:/Users/FFMANC/.gemini/antigravity/brain/0ccd676e-d95d-4058-adab-b1ffff83b01e/coding_standards.md). Failure to adhere to standards (e.g., PowerShell file edits, missing documentation, or branding deviations) is not permitted.
+
+L2 NextGen ACM is a premium, modern, and highly responsive web-based account management interface designed specifically for L2J Mobius servers. Built with **Next.js 14**, **Prisma**, **TypeScript**, and **Framer Motion**, it provides a stunning dark-themed experience with real-time server metrics.
 
 ---
 
@@ -98,4 +101,16 @@ The L2J Mobius NextGen ACM is optimized for:
 ## 📜 License & Credits
 
 This is a Free & Open Source Project. Customization and setup may be charged if requested.
-Made with ❤️ for L2J Mobius Community. Powered by **Next.js** and **L2J Mobius**.
+Made with ❤️ for L2J Community. Powered by **Next.js** and **L2 NextGen**.
+
+---
+
+## Latest Features (Dashboard Phase 2)
+- **NG Currency System**: Fully integrated NG coin system with coin pile icons.
+- **Bonus Credit System**: Automated 5% bonus for every 10 NG coins purchased.
+- **Premium Payment Interface**: Centralized modal with preset and manual recharge options.
+- **Dynamic Theme & Language Toggles**: Dashboard controls in sync with the landing page design.
+- **Smart Loader**: Navigation-intelligent pre-loader (skips on errors/404).
+- **Dashboard Compact Excellence**: Optimized margins, paddings, and font sizes for a more modern, data-dense, and efficient management experience.
+- **Intelligent Sidebar**: Implemented a "Collapsed State" where only icons are visible, maximizing workspace while maintaining rapid navigation.
+- **Branding Excellence**: Refined L2 NextGen ACM visual identity with original right-justified subtext alignment and mixed-case "Powered by NextJS".
