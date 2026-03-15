@@ -1,6 +1,6 @@
 # L2J Mobius NextGen ACM (Account Control Manager)
 
-L2J Mobius NextGen ACM is a premium, modern, and highly responsive web-based account management interface designed specifically for L2J Mobius servers (Essence/Vanguard). Built with **Next.js 14**, **Prisma**, **TypeScript**, and **Framer Motion**, it provides a stunning dark-themed experience with real-time server metrics.
+L2J Mobius NextGen ACM is a premium, modern, and highly responsive web-based account management interface designed specifically for L2J Mobius servers. Built with **Next.js 14**, **Prisma**, **TypeScript**, and **Framer Motion**, it provides a stunning dark-themed experience with real-time server metrics.
 
 ---
 
@@ -95,5 +95,5 @@ The L2J Mobius NextGen ACM is optimized for:
 
 ## 📜 License & Credits
 
-Developed for the L2J Mobius Community. Free & Open Source.
-❤️ Powered by **Next.js** and **L2J Mobius**.
+This is a Free & Open Source Project. Customization and setup may be charged if requested.
+Made with ❤️ for L2J Mobius Community. Powered by **Next.js** and **L2J Mobius**.
