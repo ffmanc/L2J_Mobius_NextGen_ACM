@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// Represents the "accounts" table from the Legacy L2J Mobius Login Server
+model Account {
+  login        String    @id @db.VarChar(45)
+  password     String?   @db.VarChar(45)
+  email        String?   @db.VarChar(255)
+  created_time DateTime  @default(now()) @db.Timestamp(0)
+  lastactive   BigInt    @default(0) @db.UnsignedBigInt
+  accessLevel  Int       @default(0) @db.TinyInt
+  lastIP       String?   @db.Char(15)
+  lastServer   Int?      @default(1) @db.TinyInt
+  pcIp         String?   @db.Char(15)
+  hop1         String?   @db.Char(15)
+  hop2         String?   @db.Char(15)
+  hop3         String?   @db.Char(15)
+  hop4         String?   @db.Char(15)
+
+  @@map("accounts")
+}
+
+/// Represents the "characters" table from the Legacy L2J Mobius Game Server
+model Character {
+  charId         Int      @id @db.UnsignedInt
+  account_name   String?  @db.VarChar(45)
+  char_name      String   @db.VarChar(35)
+  level          Int?     @db.UnsignedTinyInt
+  maxHp          Int?     @db.UnsignedInt
+  curHp          Int?     @db.UnsignedInt
+  maxCp          Int?     @db.UnsignedMediumInt
+  curCp          Int?     @db.UnsignedMediumInt
+  maxMp          Int?     @db.UnsignedMediumInt
+  curMp          Int?     @db.UnsignedMediumInt
+  face           Int?     @db.UnsignedTinyInt
+  hairStyle      Int?     @db.UnsignedTinyInt
+  hairColor      Int?     @db.UnsignedTinyInt
+  sex            Int?     @db.UnsignedTinyInt
+  heading        Int?     @db.MediumInt
+  x              Int?     @db.MediumInt
+  y              Int?     @db.MediumInt
+  z              Int?     @db.MediumInt
+  exp            BigInt?  @default(0) @db.UnsignedBigInt
+  expBeforeDeath BigInt?  @default(0) @db.UnsignedBigInt
+  sp             BigInt   @default(0) @db.UnsignedBigInt
+  reputation     Int?     @db.Int
+  fame           Int      @default(0) @db.UnsignedMediumInt
+  raidbossPoints Int      @default(0) @db.UnsignedMediumInt
+  pvpkills       Int?     @db.UnsignedSmallInt
+  pkkills        Int?     @db.UnsignedSmallInt
+  clanid         Int?     @db.UnsignedInt
+  race           Int?     @db.UnsignedTinyInt
+  classid        Int?     @db.UnsignedTinyInt
+  base_class     Int      @default(0) @db.UnsignedTinyInt
+  transform_id   Int      @default(0) @db.UnsignedSmallInt
+  deletetime     BigInt   @default(0) @db.UnsignedBigInt
+  cancraft       Int?     @db.UnsignedTinyInt
+  title          String?  @db.VarChar(21)
+  title_color    Int      @default(15530402) @db.UnsignedMediumInt
+  accesslevel    Int?     @default(0) @db.MediumInt
+  online         Int?     @db.UnsignedTinyInt
+  onlinetime     Int?     @db.Int
+  char_slot      Int?     @db.UnsignedTinyInt
+  lastAccess     BigInt   @default(0) @db.UnsignedBigInt
+  clan_privs     Int?     @default(0) @db.UnsignedInt
+  wantspeace     Int?     @default(0) @db.UnsignedTinyInt
+  power_grade    Int?     @db.UnsignedTinyInt
+  nobless        Int      @default(0) @db.UnsignedTinyInt
+  subpledge      Int      @default(0) @db.SmallInt
+  lvl_joined_academy Int  @default(0) @db.UnsignedTinyInt
+  apprentice     Int      @default(0) @db.UnsignedInt
+  sponsor        Int      @default(0) @db.UnsignedInt
+  clan_join_expiry_time BigInt @default(0) @db.UnsignedBigInt
+  clan_create_expiry_time BigInt @default(0) @db.UnsignedBigInt
+  bookmarkslot   Int      @default(0) @db.UnsignedSmallInt
+  vitality_points Int     @default(0) @db.UnsignedMediumInt
+  createDate     DateTime @default(dbgenerated("'2015-01-01'")) @db.Date
+  language       String?  @db.VarChar(2)
+  faction        Int      @default(0) @db.UnsignedTinyInt
+  pccafe_points  Int      @default(0) @db.Int
+  deaths         Int      @default(0) @db.SmallInt
+  kills          Int      @default(0) @db.SmallInt
+
+  @@index([account_name])
+  @@index([char_name])
+  @@index([clanid])
+  @@index([online])
+  @@index([charId])
+  @@index([account_name, createDate])
+  @@index([createDate])
+
+  @@map("characters")
+}
