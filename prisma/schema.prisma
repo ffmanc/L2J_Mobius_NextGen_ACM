@@ -23,8 +23,49 @@ model Account {
   hop3         String?   @db.Char(15)
   hop4         String?   @db.Char(15)
   activated    Int       @default(0) @db.TinyInt
+  
+  // Panel RBAC
+  panelRole    PanelUserRole?
 
   @@map("accounts")
+}
+
+model PanelRole {
+  id          Int                  @id @default(autoincrement())
+  name        String               @unique
+  description String?
+  permissions PanelRolePermission[]
+  users       PanelUserRole[]
+
+  @@map("panel_roles")
+}
+
+model PanelPermission {
+  id          Int                   @id @default(autoincrement())
+  node        String                @unique // e.g., "feature:shop"
+  description String?
+  roles       PanelRolePermission[]
+
+  @@map("panel_permissions")
+}
+
+model PanelRolePermission {
+  roleId       Int
+  permissionId Int
+  role         PanelRole       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   PanelPermission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("panel_role_permissions")
+}
+
+model PanelUserRole {
+  userLogin String    @id @db.VarChar(45)
+  roleId    Int
+  account   Account   @relation(fields: [userLogin], references: [login], onDelete: Cascade)
+  role      PanelRole @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@map("panel_user_roles")
 }
 
 /// Represents the "characters" table from the Legacy L2J Mobius Game Server

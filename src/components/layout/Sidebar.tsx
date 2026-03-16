@@ -11,25 +11,33 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Logo } from "@/components/common/Logo";
+import { PERMISSIONS } from "@/lib/permissions";
 
-export function Sidebar({ isAdmin = false }: { isAdmin?: boolean }) {
+export function Sidebar({ userPermissions = [] }: { userPermissions?: string[] }) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
+  const hasPermission = (node: string) => userPermissions.includes(node);
+
   const mainLinks = [
-    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Shop", href: "/dashboard/shop", icon: Gamepad },
-    { name: "Claim Free VIP", href: "/dashboard/vip", icon: ShieldCheck },
-    { name: "My Donations", href: "/dashboard/donations", icon: Heart },
-    { name: "Account Settings", href: "/dashboard/settings", icon: Settings },
-    { name: "Login History", href: "/dashboard/history", icon: History },
+    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard, permission: PERMISSIONS.ACCOUNT_VIEW },
+    { name: "Shop", href: "/dashboard/shop", icon: Gamepad, permission: PERMISSIONS.ACCOUNT_VIEW },
+    { name: "Claim Free VIP", href: "/dashboard/vip", icon: ShieldCheck, permission: PERMISSIONS.ACCOUNT_VIEW },
+    { name: "My Donations", href: "/dashboard/donations", icon: Heart, permission: PERMISSIONS.ACCOUNT_VIEW },
+    { name: "Account Settings", href: "/dashboard/settings", icon: Settings, permission: PERMISSIONS.ACCOUNT_MODIFY },
+    { name: "Login History", href: "/dashboard/history", icon: History, permission: PERMISSIONS.ACCOUNT_VIEW },
   ];
 
-  const adminLinks = [
-    { name: "Server Logic", href: "/admin/game-data", icon: Server },
-    { name: "Donations history", href: "/admin/donations", icon: ChartArea },
-    { name: "Tasks Management", href: "/admin/tasks", icon: CheckSquare },
-    { name: "System Settings", href: "/admin/settings", icon: Settings },
+  const staffLinks = [
+    { name: "Server Logic", href: "/admin/game-data", icon: Server, permission: PERMISSIONS.ADMIN_VIEW_PLAYERS },
+    { name: "Donations history", href: "/admin/donations", icon: ChartArea, permission: PERMISSIONS.ADMIN_VIEW_LOGS },
+    { name: "Tasks Management", href: "/admin/tasks", icon: CheckSquare, permission: PERMISSIONS.ADMIN_VIEW_LOGS },
+  ];
+
+  const panelLinks = [
+    { name: "Branding", href: "/admin/branding", icon: Heart, permission: PERMISSIONS.PANEL_BRANDING },
+    { name: "System Settings", href: "/admin/settings", icon: Settings, permission: PERMISSIONS.PANEL_CONFIG_MODIFY },
+    { name: "RBAC Manager", href: "/admin/rbac", icon: ShieldCheck, permission: PERMISSIONS.PANEL_RBAC_MODIFY },
   ];
 
   return (
@@ -72,20 +80,20 @@ export function Sidebar({ isAdmin = false }: { isAdmin?: boolean }) {
       </div>
 
       <div className="sidebar-content">
+        {/* Account Section */}
         <div className="nav-section">
-          <AnimatePresence>
-            {!isCollapsed && (
-              <motion.span 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="section-label"
-              >
-                Account
-              </motion.span>
-            )}
-          </AnimatePresence>
+          {!isCollapsed && (
+            <motion.span 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="section-label"
+            >
+              Account
+            </motion.span>
+          )}
           <div className="nav-list">
             {mainLinks.map((link) => {
+              if (!hasPermission(link.permission)) return null;
               const Icon = link.icon;
               const isActive = pathname === link.href;
               return (
@@ -111,21 +119,21 @@ export function Sidebar({ isAdmin = false }: { isAdmin?: boolean }) {
           </div>
         </div>
 
-        {isAdmin && (
+        {/* Staff Administration Section */}
+        {staffLinks.some(link => hasPermission(link.permission)) && (
           <div className="nav-section admin">
-            <AnimatePresence>
-              {!isCollapsed && (
-                <motion.span 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="section-label"
-                >
-                  Administration
-                </motion.span>
-              )}
-            </AnimatePresence>
+            {!isCollapsed && (
+              <motion.span 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="section-label"
+              >
+                In-game Administration
+              </motion.span>
+            )}
             <div className="nav-list">
-              {adminLinks.map((link) => {
+              {staffLinks.map((link) => {
+                if (!hasPermission(link.permission)) return null;
                 const Icon = link.icon;
                 const isActive = pathname.startsWith(link.href);
                 return (
@@ -136,6 +144,47 @@ export function Sidebar({ isAdmin = false }: { isAdmin?: boolean }) {
                     title={isCollapsed ? link.name : ""}
                   >
                     <Icon size={20} className="nav-icon text-red-500" />
+                    {!isCollapsed && (
+                      <motion.span 
+                        initial={{ opacity: 0, x: -5 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        className="nav-text"
+                      >
+                        {link.name}
+                      </motion.span>
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Panel Administration Section */}
+        {panelLinks.some(link => hasPermission(link.permission)) && (
+          <div className="nav-section admin">
+            {!isCollapsed && (
+              <motion.span 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="section-label"
+              >
+                Panel Administration
+              </motion.span>
+            )}
+            <div className="nav-list">
+              {panelLinks.map((link) => {
+                if (!hasPermission(link.permission)) return null;
+                const Icon = link.icon;
+                const isActive = pathname.startsWith(link.href);
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`nav-item ${isActive ? "active" : ""}`}
+                    title={isCollapsed ? link.name : ""}
+                  >
+                    <Icon size={20} className="nav-icon text-blue-500" />
                     {!isCollapsed && (
                       <motion.span 
                         initial={{ opacity: 0, x: -5 }}

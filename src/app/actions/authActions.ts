@@ -3,6 +3,9 @@
 import { db } from "@/lib/db";
 import { L2jCrypto } from "@/lib/l2jCrypto";
 import { cookies } from "next/headers";
+import { RBAC } from "@/lib/rbac";
+import { ConfigStore } from "@/lib/configStore";
+import { Language, translations } from "@/lib/translations";
 
 /**
  * Next.js Server Action to handle user login.
@@ -71,14 +74,25 @@ export async function authenticate(prevState: any, formData: FormData) {
     }
 
     // 4. Verification Check (The new 'activated' field)
-    // @ts-ignore - Prisma might not have generated the type yet
-    if (account.activated === 0) {
+    const settings = ConfigStore.get();
+    // @ts-ignore - Prisma property access helper
+    if (settings.features.emailVerification && account.activated === 0) {
       return { error: "Your account is not activated. Please check your email.", success: false };
     }
 
     // 5. Security checks matching L2 conventions (Banned)
     if (account.accessLevel === -1) {
       return { error: "This account has been banned.", success: false };
+    }
+
+    // 6. Ensure RBAC role is assigned
+    // @ts-ignore - Prisma might have some hydration delay
+    if (!account.panelRole) {
+      let roleName = "USER";
+      if (account.accessLevel === 100) roleName = "MASTER";
+      else if (account.accessLevel >= 10) roleName = "STAFF";
+      
+      await RBAC.assignRole(account.login, roleName);
     }
 
     // 6. Update the login history and Last IP

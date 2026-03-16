@@ -1,0 +1,30 @@
+{
+  "server": {
+    "name": "L2 NextGen ACM",
+    "version": "1.0.0",
+    "website": "example.com",
+    "discord": "https://discord.gg/example"
+  },
+  "branding": {
+    "logoPath": "/images/logo.png",
+    "primaryColor": "#CCFF00",
+    "theme": "dark"
+  },
+  "smtp": {
+    "host": "localhost",
+    "port": 1025,
+    "user": "",
+    "pass": "",
+    "fromEmail": "noreply@l2nextgen.com"
+  },
+  "features": {
+    "emailVerification": true,
+    "allowRegister": true,
+    "protectionProvider": "cloudflare"
+  },
+  "shop": {
+    "currencyName": "NG",
+    "exchangeRate": 1.0,
+    "minAmount": 10
+  }
+}

@@ -1,0 +1,76 @@
+/* Admin Settings Styling */
+.admin-page-premium {
+  padding: 2rem;
+}
+.settings-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+.settings-label {
+  display: block;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+.settings-input {
+  width: 100%;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: white;
+  outline: none;
+  transition: all 0.2s;
+}
+.settings-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+.settings-toggle {
+  width: 3rem;
+  height: 1.5rem;
+  appearance: none;
+  background: #1e293b;
+  border-radius: 1rem;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.settings-toggle:checked {
+  background: #3b82f6;
+}
+.settings-toggle::before {
+  content: '';
+  position: absolute;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: white;
+  top: 0.125rem;
+  left: 0.125rem;
+  transition: transform 0.2s;
+}
+.settings-toggle:checked::before {
+  transform: translateX(1.5rem);
+}
+.btn-premium {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+}
+.btn-premium:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+}
+.btn-premium:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -18,17 +18,34 @@ export default async function DashboardLayout({ children }: { children: React.Re
     redirect("/login");
   }
 
-  // Check if user is admin (accesslevel > 0 in characters table, or via a special flag)
-  // For now, let's assume accesslevel >= 1 is admin.
-  const adminChar = await db.character.findFirst({
-    where: { account_name: session.value, accesslevel: { gt: 0 } },
+  // Fetch user with RBAC role and permissions
+  const user = await db.account.findUnique({
+    where: { login: session.value },
+    include: {
+      panelRole: {
+        include: {
+          role: {
+            include: {
+              permissions: {
+                include: {
+                  permission: true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   });
-  const isAdmin = !!adminChar;
+
+  // Extract permission nodes
+  // @ts-ignore - Prisma hydration may be delayed
+  const permissions = (user as any)?.panelRole?.role?.permissions?.map((rp: any) => rp.permission.node) || [];
 
   return (
     <div className="dashboard-layout">
-      {/* Sidebar Component */}
-      <Sidebar isAdmin={isAdmin} />
+      {/* Sidebar Component with dynamic permissions */}
+      <Sidebar userPermissions={permissions} />
 
       <div className="main-content-wrapper">
         {/* Top Navigation Bar Component */}
